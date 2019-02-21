@@ -29,7 +29,7 @@ setup(name = "zip_normalize_filename",
     # py2exe option
     console=[{'script':"zip_normalize_filename.py"}],
     options={'py2exe':{
-        'packages':['zipfile'],
+        'packages':[],
         'bundle_files':2,
         'optimize':2,
         'dist_dir':'dist/zip_normalize_filename-{0:s}'.format(vars['__version__'])}},
