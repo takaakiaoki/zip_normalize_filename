@@ -4,6 +4,10 @@
 #   1. filename is encoded to utf-8 (NFC)
 #   2. global purpose flag 11 (Language encoding flag) is on
 
+from __future__ import print_function
+
+import sys
+
 import zipfile
 import unicodedata
 import copy
@@ -26,7 +30,10 @@ def zip_normalize_filename(src, dst, srccodec='utf-8', verbose=False):
         else:
             # original file is loaded as cp473 codec
             # re-decode using srccodec
-            newinfo.filename = newinfo.filename.encode('cp437').decode(srccodec)
+            if sys.version_info[0] < 3:
+                newinfo.filename = newinfo.filename.decode(srccodec)
+            else:
+                newinfo.filename = newinfo.filename.encode('cp437').decode(srccodec)
             # put EFS flag
             newinfo.flag_bits |= 0b100000000000
 
